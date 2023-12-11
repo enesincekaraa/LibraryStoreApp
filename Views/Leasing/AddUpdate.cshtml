@@ -1,0 +1,55 @@
+﻿@model Leasing
+
+<form method="post" enctype="multipart/form-data">
+   <div class="row">
+       <div class="col-10">
+       
+                <div class="border p-3 mt-5">
+                    <div class="row pb-3">
+                        <h2 class="text-primary">@(Model == null ? "Leasing" : "Update") </h2>
+                    </div>
+                    <hr />
+                    <div class="mb-3">
+                        <label asp-for="CustomerId" class="p-0"></label>
+                        <input asp-for="CustomerId" class="form-control" />
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="BookId" class="p-0"></label>
+                        <select asp-for="BookId" asp-items="ViewBag.BookList" class="form-select"></select>
+                    </div>
+                  
+
+                    @if (Model != null)
+                    {
+                        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Leasing</button>
+
+                    }
+
+                    <a asp-controller="Leasing" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">Return To Leasing</a>
+
+
+
+
+                </div>
+        </div>
+
+        <div class="col-2">
+            @if (Model != null)
+            {
+                <br />
+                <img src="@Model.Book.ImageUrl" width="100%" style="border-radius:7px;border:1px solid #bbb9b9" />
+
+            }
+        </div>
+           
+       
+
+   </div>
+   
+    
+</form>

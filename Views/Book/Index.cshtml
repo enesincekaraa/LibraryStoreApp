@@ -1,0 +1,67 @@
+﻿@using LibraryStoreApp.Utility
+@model List<Book>
+
+@if (TempData["success"] != null)
+{
+    <h2 style="color:red">@TempData["success"]</h2>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4"
+    <div>
+<h1>Books</h1>
+    </div>
+</div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Book Name</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Book Type</th>
+                <th></th>
+                <th></th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td align="center" valign="middle">
+                        <img src="@book.ImageUrl" style="border-radius:7px; border:1px; solid #bbb9b9; max-width:145px; max:275px;" />
+                    </td>
+                    <td align="center" valign="middle">@book.Id</td>
+                    <td align="center" valign="middle">@book.Id</td>
+                    <td align="center" valign="middle">@book.BookName</td>
+                    <td align="center" valign="middle">@book.Description</td>
+                    <td align="center" valign="middle">@book.Author</td>
+                    <td align="center" valign="middle">@book.Price</td>
+                    <td align="center" valign="middle">@book.BookType.Name</td>
+
+                    @if (User.IsInRole(UserRoles.Role_Admin))
+                    {
+                        <td align="center" valign="middle"><a asp-controller="Book" asp-action="AddUpdate" asp-route-id="@book.Id" type="button" class="btn btn-success" style="width:250px">Update</a></td>
+                        <td align="center" valign="middle"><a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" type="button" class="btn btn-danger" style="width:250px">Delete</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+        </table>
+
+    @if (User.IsInRole(UserRoles.Role_Admin))
+    {
+        <div class="row pt-3 pb-2">
+            <div>
+                <a class="btn btn-lg btn-primary" type="button" asp-controller="Book" asp-action="AddUpdate">Create New Book</a>
+            </div>
+        </div>
+    }
+
+</div>
+
